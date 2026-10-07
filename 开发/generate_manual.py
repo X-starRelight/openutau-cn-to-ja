@@ -172,7 +172,7 @@ def main():
     add_heading(doc, "方式一：使用安装包（推荐）", level=2)
     add_paragraph(doc, "双击 MyZHtoJAPlugin-v2.1.7-Setup.exe，按提示下一步即可。")
     add_paragraph(doc, "安装程序会自动探测 OpenUtau 的 Plugins 目录（通常在 "
-                       "Documents\\OpenUtau\\Plugins\\）。如果探测失败，"
+                       "<文档目录>\\OpenUtau\\Plugins\\）。如果探测失败，"
                        "手动浏览到你自己的 Plugins 目录即可。")
 
     add_heading(doc, "方式二：手动安装", level=2)
@@ -180,7 +180,7 @@ def main():
     add_heading(doc, "第一步：找到 OpenUtau 数据目录", level=3)
     add_paragraph(doc, "新版 OpenUtau 的插件目录通常在用户文档下：")
     add_code_block(doc,
-                   "C:\\Users\\<你的用户名>\\Documents\\OpenUtau\\\n"
+                   "<文档目录>\\OpenUtau\\\n"
                    "├── Plugins\\          ← 插件放这里\n"
                    "├── Singers\\\n"
                    "└── Cache\\")
@@ -201,7 +201,7 @@ def main():
 
     add_heading(doc, "第三步：复制插件 DLL", level=3)
     add_paragraph(doc, "把 MyZHtoJAPlugin.dll 复制到 Plugins 文件夹：")
-    add_code_block(doc, "C:\\Users\\<你的用户名>\\Documents\\OpenUtau\\Plugins\\MyZHtoJAPlugin.dll")
+    add_code_block(doc, "<文档目录>\\OpenUtau\\Plugins\\MyZHtoJAPlugin.dll")
     add_paragraph(doc, "复制完成后，Plugins 目录里应该有：")
     add_code_block(doc,
                    "Plugins\\\n"
@@ -270,7 +270,7 @@ def main():
     set_cjk_font(run, size=10.5, bold=True, color=(0xC0, 0x00, 0x00))
     add_numbered(doc, "完全退出 OpenUtau")
     add_numbered(doc, "复制新的 DLL 到 Plugins\\")
-    add_numbered(doc, "清空 Documents\\OpenUtau\\Cache\\ 里的内容")
+    add_numbered(doc, "清空 <文档目录>\\OpenUtau\\Cache\\ 里的内容")
     add_numbered(doc, "启动 OpenUtau，重新渲染")
     add_paragraph(doc, "不清缓存会导致 OpenUtau 继续播放旧音素器生成的音频，"
                        "你改了参数也听不到效果。")
@@ -374,7 +374,7 @@ def main():
     # ---------- 九、YAML 配置 ----------
     add_heading(doc, "九、YAML 配置说明", level=1)
     add_paragraph(doc, "插件启动时会自动读取以下位置的 zh2ja.yaml：")
-    add_bullet(doc, "Documents\\OpenUtau\\Plugins\\zh2ja.yaml（全局配置）")
+    add_bullet(doc, "<文档目录>\\OpenUtau\\Plugins\\zh2ja.yaml（全局配置）")
     add_bullet(doc, "音源目录\\zh2ja.yaml（该音源专属配置，优先级更高）")
     add_paragraph(doc, "没有这个文件时，插件使用内置默认值。示例配置：")
     add_code_block(doc,
@@ -405,7 +405,7 @@ def main():
 
     add_heading(doc, "Q1：安装后音素器列表里找不到 \"ZH to JA\"？", level=3)
     add_paragraph(doc, "排查顺序：")
-    add_numbered(doc, "确认插件文件位置正确：应该在 Documents\\OpenUtau\\Plugins\\ 下。")
+    add_numbered(doc, "确认插件文件位置正确：应该在 <文档目录>\\OpenUtau\\Plugins\\ 下。")
     add_numbered(doc, "确认文件名完整：不能是 MyZHtoJAPlugin.dll.txt 或带 (1) 后缀。")
     add_numbered(doc, "查看日志：菜单栏\"帮助\" → \"显示日志\"，搜索 ZH to JA。")
     add_numbered(doc, "重启 OpenUtau：有时候需要完全退出再启动。")
@@ -417,7 +417,7 @@ def main():
     add_paragraph(doc, "OpenUtau 会缓存已渲染的音频片段，音符内容不变就不会重新渲染。"
                        "换完插件后必须：")
     add_numbered(doc, "完全关闭 OpenUtau")
-    add_numbered(doc, "清空 Documents\\OpenUtau\\Cache\\ 里的内容")
+    add_numbered(doc, "清空 <文档目录>\\OpenUtau\\Cache\\ 里的内容")
     add_numbered(doc, "重新启动并渲染")
 
     add_heading(doc, "Q3：渲染时报 Oto not found for \"ゃ\"？", level=3)
@@ -477,7 +477,7 @@ def main():
     add_paragraph(doc, "如果使用安装包安装，直接到「控制面板 → 程序和功能」卸载即可。")
     add_paragraph(doc, "如果手动安装，只需要：")
     add_numbered(doc, "完全关闭 OpenUtau")
-    add_numbered(doc, "删除 Documents\\OpenUtau\\Plugins\\MyZHtoJAPlugin.dll")
+    add_numbered(doc, "删除 <文档目录>\\OpenUtau\\Plugins\\MyZHtoJAPlugin.dll")
     add_numbered(doc, "重新启动 OpenUtau")
     p = doc.add_paragraph()
     run = p.add_run("不会影响 OpenUtau 的任何其他功能。")
@@ -494,7 +494,7 @@ def main():
             ["插件版本", "v2.1.7"],
             ["依赖", "OpenUtau v0.1.570+ / .NET 10 Desktop Runtime"],
             ["适用平台", "Windows x64"],
-            ["安装方式", "双击安装包，或复制 DLL 到 Documents\\OpenUtau\\Plugins\\"],
+            ["安装方式", "双击安装包，或复制 DLL 到 <文档目录>\\OpenUtau\\Plugins\\"],
         ],
         col_widths=[4, 11],
     )

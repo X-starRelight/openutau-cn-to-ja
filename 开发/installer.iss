@@ -64,7 +64,7 @@ function GetDefaultDir(Param: String): String;
 var
   DocsDir: String;
 begin
-  // 1. 优先用 Documents\OpenUtau\Plugins\
+  // 1. 优先用 <文档目录>\OpenUtau\Plugins\
   DocsDir := ExpandConstant('{userdocs}\OpenUtau\Plugins');
   if DirExists(DocsDir) then
   begin
@@ -72,7 +72,7 @@ begin
     exit;
   end;
 
-  // 2. 检查 Documents\OpenUtau（还没建 Plugins 的情况）
+  // 2. 检查 <文档目录>\OpenUtau（还没建 Plugins 的情况）
   DocsDir := ExpandConstant('{userdocs}\OpenUtau');
   if DirExists(DocsDir) then
   begin
@@ -175,7 +175,7 @@ begin
   begin
     Msg := '安装完成！' + #13#10 + #13#10 +
            '请启动 OpenUtau，在音轨设置里把音素器切换为 "ZH to JA"。' + #13#10 + #13#10 +
-           '提示：更换 DLL 或修改 zh2ja.yaml 后，记得清空 Documents\OpenUtau\Cache\ 再渲染。';
+           '提示：更换 DLL 或修改 zh2ja.yaml 后，记得清空 <文档目录>\OpenUtau\Cache\ 再渲染。';
 
     if not OpenUtauFound then
     begin

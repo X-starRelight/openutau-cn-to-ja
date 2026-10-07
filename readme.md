@@ -47,10 +47,10 @@
 
 ### 方式一：使用安装包（推荐）
 
-1. 下载最新的 MyZHtoJAPlugin-v2.1.7-Setup.exe
+1. 下载最新的 `MyZHtoJAPlugin-v2.1.7-Setup.exe`
 2. **完全关闭 OpenUtau**（任务管理器确认无 OpenUtau.exe 进程）
 3. 双击安装包，按提示下一步
-4. 安装程序会自动探测 OpenUtau 的 Plugins 目录
+4. 安装程序会自动探测 OpenUtau 的 `Plugins\\` 目录
 5. 完成后可选择自动启动 OpenUtau
 
 ### 方式二：手动安装
@@ -59,13 +59,13 @@
 2. **完全关闭 OpenUtau**
 3. 复制 DLL 到以下位置之一：
 
-C:\Users\<你的用户名>\Documents\OpenUtau\Plugins\MyZHtoJAPlugin.dll
+`<文档目录>\\OpenUtau\\Plugins\\MyZHtoJAPlugin.dll`
 
 或（便携版）：
 
-<OpenUtau安装目录>\Plugins\MyZHtoJAPlugin.dll
+`<OpenUtau安装目录>\\Plugins\\MyZHtoJAPlugin.dll`
 
-4. 启动 OpenUtau，在音轨设置里找到音素器 **ZH to JA**
+1. 启动 OpenUtau，在音轨设置里找到音素器 **ZH to JA**
 
 💡 提示：如果 OpenUtau 正在运行，**DLL 会被锁定**，复制会失败或 DLL 消失。请务必先完全退出。
 
@@ -144,7 +144,7 @@ C:\Users\<你的用户名>\Documents\OpenUtau\Plugins\MyZHtoJAPlugin.dll
 ⚠️ **更换 DLL 或修改 YAML 后必做**：
 
 1. 完全退出 OpenUtau
-2. 清空 Documents\OpenUtau\Cache\ 里的内容
+2. 清空 `<文档目录>\\OpenUtau\\Cache\\` 里的内容
 3. 重新启动并渲染
 
 不清缓存会导致 OpenUtau 继续播放旧音素器生成的音频，**你改了参数也听不到效果**。
@@ -155,11 +155,12 @@ C:\Users\<你的用户名>\Documents\OpenUtau\Plugins\MyZHtoJAPlugin.dll
 
 插件会自动读取以下位置的 zh2ja.yaml：
 
-* Documents\OpenUtau\Plugins\zh2ja.yaml（全局配置）
-* <音源目录>\zh2ja.yaml（该音源专属，优先级更高）
+* `<文档目录>\OpenUtau\Plugins\zh2ja.yaml`（全局配置）
+* `<音源目录>\zh2ja.yaml`（该音源专属，优先级更高）
 
 没有这个文件时使用内置默认值。完整示例：
 
+```yaml
 # ===== 基础开关 =====
 nasal_mode: short       # none / short / full
 nasal_ms: 120           # short 模式下ん占音符末尾毫秒
@@ -183,6 +184,7 @@ use_wildcard: true      # v2.1.7 新增，启用 * 过渡音素
 # ===== 别名覆盖（弱音源用短别名）=====
 # alias_overrides:
 #   "ん": ["ん -", "n -", "n"]
+```
 
 ---
 
@@ -191,7 +193,7 @@ use_wildcard: true      # v2.1.7 新增，启用 * 过渡音素
 <details>
 <summary><b>Q1：音素器列表里找不到 ZH to JA？</b></summary>
 
-* 确认 DLL 位置正确：Documents\OpenUtau\Plugins\
+* 确认 DLL 位置正确：<文档目录>\OpenUtau\Plugins\
 * 确认文件名完整：不能是 MyZHtoJAPlugin.dll.txt 或带 (1) 后缀
 * 查看日志：菜单栏帮助 → 显示日志，搜索 ZH to JA
 * 重启 OpenUtau
@@ -204,7 +206,7 @@ use_wildcard: true      # v2.1.7 新增，启用 * 过渡音素
 OpenUtau 的**缓存机制**。必须：
 
 * 完全关闭 OpenUtau
-* 清空 Documents\OpenUtau\Cache\ 里的内容
+* 清空 <文档目录>\OpenUtau\Cache\ 里的内容
 * 重新启动并渲染
 
 </details>
