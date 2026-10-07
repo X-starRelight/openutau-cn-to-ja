@@ -10,7 +10,7 @@
 > 历史版本与 tag 不重写，自 **v2.2.0** 起严格执行 SemVer 2.0.0。
 > 历史条目在没有确切发布日期时不标注日期。
 
-## [Unreleased]
+## [Unreleased] 2.2.0
 
 ### Changed
 
@@ -24,6 +24,11 @@
 - GitHub Actions CI：编译 → 测试 → Inno Setup 安装包（`build/fetch-deps.ps1` 自动拉取依赖）
 - CONTRIBUTING.md（Conventional Commits + SemVer + 发版检查单）
 - `zh2ja.yaml` 模板补充 `use_wildcard` 键
+- 全部标准音节的 `ParsePinyin` 回归测试
+
+### Fixed
+
+- 修复 `yuan` 拼音解析返回 null 导致该音节无声的缺陷（`Finals` 表补 `van` 项，输出 ゆえん）
 
 ## [2.1.7] - 2026-10-02
 

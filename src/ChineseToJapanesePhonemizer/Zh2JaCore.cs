@@ -79,7 +79,7 @@ namespace OpenUtau.Plugin.Builtin {
 
         internal static readonly string[] Finals = {
             "iang", "iong", "uang", "ueng",
-            "ang", "eng", "ing", "ong", "ian", "iao", "uan", "uai",
+            "ang", "eng", "ing", "ong", "ian", "iao", "uan", "uai", "van",
             "ai", "ei", "ao", "ou", "an", "en", "in", "un", "er",
             "ia", "ie", "iu", "ua", "uo", "ui", "ue", "ve", "vn",
             "a", "o", "e", "i", "u", "v"
