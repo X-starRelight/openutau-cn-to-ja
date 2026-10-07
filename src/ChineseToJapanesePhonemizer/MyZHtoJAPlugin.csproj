@@ -11,6 +11,11 @@
 
   <ItemGroup>
     <Compile Include="ChineseToJapanesePhonemizer.cs" />
+    <Compile Include="Zh2JaCore.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="ChineseToJapanesePhonemizer.Tests" />
   </ItemGroup>
 
   <ItemGroup>

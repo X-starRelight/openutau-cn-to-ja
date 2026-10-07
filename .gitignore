@@ -1,7 +1,14 @@
-# 编译产物
-开发/bin/
-开发/obj/
-开发/dist/
+# 构建产物
+bin/
+obj/
+build/dist/
+
+# 依赖 DLL（由 build/fetch-deps.ps1 下载，不纳入版本管理）
+src/ChineseToJapanesePhonemizer/*.dll
+tests/ChineseToJapanesePhonemizer.Tests/*.dll
+
+# 本地归档（历史 DLL / 安装包 / docx，不入库）
+local-archive/
 
 # IDE
 .vs/
@@ -16,17 +23,3 @@ Thumbs.db
 # 临时
 *.tmp
 *.log
-
-# 参考 DLL（体积大，不纳入版本管理）
-开发/OpenUtau.Core.dll
-开发/OpenUtau.Plugin.Builtin.dll
-开发/Serilog.dll
-开发/WanaKanaNet.dll
-开发/YamlDotNet.dll
-
-# Python 缓存
-__pycache__/
-*.pyc
-
-# 上传脚本自身
-upload_to_github.py

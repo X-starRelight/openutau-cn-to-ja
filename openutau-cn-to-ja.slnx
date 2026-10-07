@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/ChineseToJapanesePhonemizer/">
+    <Project Path="src/ChineseToJapanesePhonemizer/MyZHtoJAPlugin.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/ChineseToJapanesePhonemizer.Tests/ChineseToJapanesePhonemizer.Tests.csproj" />
+  </Folder>
+</Solution>

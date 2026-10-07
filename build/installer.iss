@@ -8,7 +8,7 @@
 #define MyAppName "ChineseToJapanesePhonemizer"
 #define MyAppVersion "2.1.7"
 #define MyAppPublisher "Deepseek"
-#define MyAppURL "https://github.com/styisme/openutau-cn-to-ja"
+#define MyAppURL "https://github.com/X-starRelight/openutau-cn-to-ja"
 
 [Setup]
 AppId={{8A3F5B21-9D4E-4C7A-B6F2-1E8D3C9A5F70}
@@ -28,7 +28,7 @@ ArchitecturesAllowed=x64compatible
 WizardStyle=modern
 PrivilegesRequired=lowest
 UninstallDisplayName={#MyAppName}
-LicenseFile=LICENSE.txt
+LicenseFile=..\LICENSE
 ; SetupIconFile=icon.ico
 
 [Languages]
@@ -37,20 +37,20 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Files]
 ; 主 DLL（编译产物）
-Source: "bin\Release\net10.0\MyZHtoJAPlugin.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\src\ChineseToJapanesePhonemizer\bin\Release\net10.0\MyZHtoJAPlugin.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 ; 默认 YAML 配置模板（不覆盖用户已存在的）
-Source: "zh2ja.yaml"; DestDir: "{app}"; Flags: onlyifdoesntexist
+Source: "..\src\ChineseToJapanesePhonemizer\zh2ja.yaml"; DestDir: "{app}"; Flags: onlyifdoesntexist
 
 ; 说明文档
-Source: "ChineseToJapanesePhonemizer_v217_使用说明.docx"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\docs\使用说明.md"; DestDir: "{app}"; Flags: ignoreversion
 
 [Run]
 ; 安装完成后勾选启动 OpenUtau（仅在找到 OpenUtau.exe 时显示）
 Filename: "{code:GetOpenUtauPath}"; Description: "启动 OpenUtau"; Flags: postinstall nowait skipifsilent; Check: HasOpenUtau
 
 ; 安装完成后勾选查看说明文档
-Filename: "{app}\ChineseToJapanesePhonemizer_v217_使用说明.docx"; Description: "查看使用说明"; Flags: shellexec postinstall skipifsilent
+Filename: "{app}\使用说明.md"; Description: "查看使用说明"; Flags: shellexec postinstall skipifsilent
 
 [Code]
 var
@@ -64,7 +64,7 @@ function GetDefaultDir(Param: String): String;
 var
   DocsDir: String;
 begin
-  // 1. 优先用 Documents\OpenUtau\Plugins\
+  // 1. 优先用 <文档目录>\OpenUtau\Plugins\
   DocsDir := ExpandConstant('{userdocs}\OpenUtau\Plugins');
   if DirExists(DocsDir) then
   begin
@@ -72,7 +72,7 @@ begin
     exit;
   end;
 
-  // 2. 检查 Documents\OpenUtau（还没建 Plugins 的情况）
+  // 2. 检查 <文档目录>\OpenUtau（还没建 Plugins 的情况）
   DocsDir := ExpandConstant('{userdocs}\OpenUtau');
   if DirExists(DocsDir) then
   begin
@@ -175,7 +175,7 @@ begin
   begin
     Msg := '安装完成！' + #13#10 + #13#10 +
            '请启动 OpenUtau，在音轨设置里把音素器切换为 "ZH to JA"。' + #13#10 + #13#10 +
-           '提示：更换 DLL 或修改 zh2ja.yaml 后，记得清空 Documents\OpenUtau\Cache\ 再渲染。';
+           '提示：更换 DLL 或修改 zh2ja.yaml 后，记得清空 <文档目录>\OpenUtau\Cache\ 再渲染。';
 
     if not OpenUtauFound then
     begin
