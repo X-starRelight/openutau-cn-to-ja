@@ -75,6 +75,17 @@ jobs:
           )
           $iscc = $candidates | Where-Object { Test-Path $_ } | Select-Object -First 1
           if (-not $iscc) { throw "ISCC.exe not found - is Inno Setup 6 installed on the runner?" }
+
+          $innoDir = Split-Path $iscc
+          $isl = Join-Path $innoDir "Languages\ChineseSimplified.isl"
+          if (-not (Test-Path $isl)) {
+            Write-Host "ChineseSimplified.isl missing, downloading from issrc..."
+            New-Item -ItemType Directory -Force -Path (Split-Path $isl) | Out-Null
+            Invoke-WebRequest -UseBasicParsing -TimeoutSec 60 `
+              -Uri "https://raw.githubusercontent.com/jrsoftware/issrc/main/Files/Languages/ChineseSimplified.isl" `
+              -OutFile $isl
+          }
+
           & $iscc build\installer.iss
           if ($LASTEXITCODE -ne 0) { throw "ISCC failed with exit code $LASTEXITCODE" }
 
