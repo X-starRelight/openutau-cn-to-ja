@@ -3,6 +3,7 @@
 
 nasal_mode: short     # none / short / full
 nasal_ms: 120         # short 模式下「ん」占音符末尾多少毫秒
+use_wildcard: true    # 通配符 * 过渡音素（Defoko 等 CV 音源）
 
 disable_vcv: false
 disable_light_tone: false

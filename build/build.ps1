@@ -1,13 +1,17 @@
 <#
 .SYNOPSIS
-    ChineseToJapanesePhonemizer v2.0 Auto Build Script
+    ChineseToJapanesePhonemizer Auto Build Script
 
 .DESCRIPTION
-    1. Verify required files (.cs + 3 DLLs)
+    1. Verify required files (.cs + dependency DLLs)
     2. Generate csproj if missing
     3. Run dotnet build
     4. Output compiled DLL path
     5. Optionally deploy to OpenUtau Plugins folder
+
+    Paths are resolved relative to this script (build/), so it can be
+    invoked from any working directory. Dependency DLLs can be fetched
+    with build\fetch-deps.ps1.
 
 .PARAMETER OpenUtauDir
     Optional. Absolute path to OpenUtau install directory.
@@ -41,9 +45,11 @@ function Write-Err  { param($msg) Write-Host "[ERROR] $msg" -ForegroundColor Red
 
 Write-Host ""
 Write-Host "=============================================" -ForegroundColor Magenta
-Write-Host " ChineseToJapanesePhonemizer v2.0 Build" -ForegroundColor Magenta
+Write-Host " ChineseToJapanesePhonemizer Build" -ForegroundColor Magenta
 Write-Host "=============================================" -ForegroundColor Magenta
 Write-Host ""
+
+$srcDir = (Resolve-Path (Join-Path $PSScriptRoot "..\src\ChineseToJapanesePhonemizer")).Path
 
 # ---- Step 0: check dotnet ----
 try {
@@ -57,7 +63,7 @@ try {
 # ---- Step 1: verify required files ----
 Write-Info "Checking required files..."
 
-$requiredCs = "ChineseToJapanesePhonemizer.cs"
+$requiredCs = Join-Path $srcDir "ChineseToJapanesePhonemizer.cs"
 $requiredDlls = @(
     "OpenUtau.Core.dll",
     "OpenUtau.Plugin.Builtin.dll",
@@ -67,14 +73,15 @@ $requiredDlls = @(
 $missing = @()
 if (-not (Test-Path $requiredCs)) { $missing += $requiredCs }
 foreach ($dll in $requiredDlls) {
-    if (-not (Test-Path $dll)) { $missing += $dll }
+    if (-not (Test-Path (Join-Path $srcDir $dll))) { $missing += $dll }
 }
 
 if ($missing.Count -gt 0) {
     Write-Err "Missing files:"
     foreach ($f in $missing) { Write-Host "    - $f" -ForegroundColor Red }
     Write-Host ""
-    Write-Host "Copy these from OpenUtau install directory:" -ForegroundColor Yellow
+    Write-Host "Run build\fetch-deps.ps1 to download them automatically," -ForegroundColor Yellow
+    Write-Host "or copy these from OpenUtau install directory into $srcDir :" -ForegroundColor Yellow
     Write-Host "    OpenUtau.Core.dll" -ForegroundColor Yellow
     Write-Host "    OpenUtau.Plugin.Builtin.dll" -ForegroundColor Yellow
     Write-Host "    WanaKanaNet.dll" -ForegroundColor Yellow
@@ -83,7 +90,7 @@ if ($missing.Count -gt 0) {
 Write-Ok "All required files present"
 
 # ---- Step 2: generate csproj if missing ----
-$csproj = "MyZHtoJAPlugin.csproj"
+$csproj = Join-Path $srcDir "MyZHtoJAPlugin.csproj"
 if (-not (Test-Path $csproj)) {
     Write-Info "Generating $csproj ..."
 
@@ -125,13 +132,13 @@ if (-not (Test-Path $csproj)) {
 }
 
 # ---- Step 3: clean old build ----
-if (Test-Path "bin") {
+if (Test-Path (Join-Path $srcDir "bin")) {
     Write-Info "Cleaning bin/ ..."
-    Remove-Item -Recurse -Force "bin" -ErrorAction SilentlyContinue
+    Remove-Item -Recurse -Force (Join-Path $srcDir "bin") -ErrorAction SilentlyContinue
 }
-if (Test-Path "obj") {
+if (Test-Path (Join-Path $srcDir "obj")) {
     Write-Info "Cleaning obj/ ..."
-    Remove-Item -Recurse -Force "obj" -ErrorAction SilentlyContinue
+    Remove-Item -Recurse -Force (Join-Path $srcDir "obj") -ErrorAction SilentlyContinue
 }
 
 # ---- Step 4: build ----
@@ -139,8 +146,10 @@ Write-Host ""
 Write-Info "Building (dotnet build -c Release) ..."
 Write-Host ""
 
+Push-Location $srcDir
 & dotnet build -c Release
 $buildExitCode = $LASTEXITCODE
+Pop-Location
 
 Write-Host ""
 
@@ -157,7 +166,7 @@ if ($buildExitCode -ne 0) {
 Write-Ok "Build succeeded"
 
 # ---- Step 5: locate output ----
-$outputDir = "bin\Release\$Framework"
+$outputDir = Join-Path $srcDir "bin\Release\$Framework"
 $outputDll = Join-Path $outputDir "MyZHtoJAPlugin.dll"
 
 if (-not (Test-Path $outputDll)) {
