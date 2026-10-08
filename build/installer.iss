@@ -5,7 +5,7 @@
 ; =====================================================================
 
 #define MyAppName "ChineseToJapanesePhonemizer"
-#define MyAppPublisher "styisme&X-starRelight"
+#define MyAppPublisher "styisme"
 #define MyAppURL "https://github.com/styisme/openutau-cn-to-ja"
 
 #ifndef MyAppVersion
