@@ -2,7 +2,7 @@
 
 > 让日语音源唱中文 —— OpenUtau 音素器插件
 
-[![Version](https://img.shields.io/badge/version-2.1.7-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-2.2.1-blue.svg)](CHANGELOG.md)
 [![CI](https://github.com/styisme/openutau-cn-to-ja/actions/workflows/ci.yml/badge.svg)](https://github.com/styisme/openutau-cn-to-ja/actions/workflows/ci.yml)
 [![Platform](https://img.shields.io/badge/platform-Windows%20x64-lightgrey.svg)](#系统要求)
 [![OpenUtau](https://img.shields.io/badge/OpenUtau-v0.1.570%2B-green.svg)](#系统要求)
