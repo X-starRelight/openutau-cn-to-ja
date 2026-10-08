@@ -108,10 +108,13 @@ jobs:
             exit 1
           }
 
-          $isl = Join-Path (Get-Location).Path "build\ChineseSimp.isl"
+          $innoDir = Split-Path $iscc
+          $isl = Join-Path $innoDir "Languages\ChineseSimplified.isl"
           if (-not (Test-Path $isl)) {
-            Invoke-WebRequest `
-              -Uri "https://raw.githubusercontent.com/jrsoftware/issrc/main/Files/Languages/Unofficial/ChineseSimplified.isl" `
+            Write-Host "ChineseSimplified.isl missing, downloading from issrc..."
+            New-Item -ItemType Directory -Force -Path (Split-Path $isl) | Out-Null
+            Invoke-WebRequest -UseBasicParsing -TimeoutSec 60 `
+              -Uri "https://raw.githubusercontent.com/jrsoftware/issrc/main/Files/Languages/ChineseSimplified.isl" `
               -OutFile $isl
           }
 
